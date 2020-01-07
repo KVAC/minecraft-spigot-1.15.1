@@ -1,0 +1,8 @@
+name: ART
+main: jds_project.minecraft.JDCSPlugin
+version: 1
+api-version: 1.13
+commands:
+   kit:
+      description: Your description
+      usage: /kit
