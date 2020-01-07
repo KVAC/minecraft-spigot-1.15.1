@@ -127,9 +127,12 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 									player.giveExp(1);
 									exp++;
 									// проверка на колво жизней и выдача
-									if (player.getHealth() < 20) {
-										player.setHealth(player.getHealth() + 1);
-										heal++;
+									if (!((player.getHealth() + 1) > 20)) {
+
+										if (player.getHealth() < 20) {
+											player.setHealth(player.getHealth() + 1);
+											heal++;
+										}
 									}
 								}
 
