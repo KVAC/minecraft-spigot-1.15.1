@@ -24,6 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import jds_project.minecraft.objects.artefacts.Artefact;
 import jds_project.minecraft.objects.artefacts.Artefact.ArtefactType;
+import net.minecraft.server.v1_15_R1.EntityBee.e;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
 	@Override
@@ -152,10 +153,16 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								ItemStack iStack = droppedItem.getItemStack();
 								if (iStack.getType() == Material.CLAY_BALL) {
 									List<Entity> list = entity.getNearbyEntities(2, 2, 2);
+									List<Entity> list2 = new ArrayList<Entity>();
+									for (int i = 0; i < list.size(); i++) {
+										if (list.get(i).getType() == EntityType.DROPPED_ITEM) {
+											list2.add(list.get(i));
+										}
+									}
 
 									boolean GLOWSTONE_DUST = false;
 									Item droppedItem2 = null;
-									for (Iterator<Entity> iterator2 = list.iterator(); iterator2.hasNext();) {
+									for (Iterator<Entity> iterator2 = list2.iterator(); iterator2.hasNext();) {
 										Entity entity2 = (Entity) iterator2.next();
 
 										droppedItem2 = (Item) entity2;
