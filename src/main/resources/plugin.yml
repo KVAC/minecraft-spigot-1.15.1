@@ -1,8 +1,8 @@
-name: ART
+name: stalker
 main: jds_project.minecraft.JDCSPlugin
 version: 1
 api-version: 1.13
 commands:
-   kit:
+   artefact:
       description: Your description
-      usage: /kit
+      usage: /artefact give <type> <player>

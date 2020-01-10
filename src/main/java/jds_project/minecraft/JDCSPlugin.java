@@ -24,13 +24,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import jds_project.minecraft.objects.artefacts.Artefact;
 import jds_project.minecraft.objects.artefacts.Artefact.ArtefactType;
-import net.minecraft.server.v1_15_R1.EntityBee.e;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-		this.getCommand("kit").setExecutor(new CommandKit());
+		this.getCommand("artefact").setExecutor(new CommandKit());
 		getServer().getPluginManager().registerEvents(this, this);
 	}
 
