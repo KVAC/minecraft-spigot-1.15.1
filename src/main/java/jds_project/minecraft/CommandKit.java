@@ -19,11 +19,23 @@ public class CommandKit implements CommandExecutor {
 			player.sendMessage("You do not have permission 'stalker.artefact.give'");
 			return false;
 		}
-		for (int i = 0; i < arg3.length; i++) {
-			player.sendMessage(arg3[i]);
+		if (arg3.length == 3) {
+			// GIVE
+			if (arg3[0].toLowerCase().equals("give".toLowerCase())) {
+				if (arg3[1].toLowerCase().equals("sluda".toLowerCase())) {
+					Sluda sluda = new Sluda();
+					player.getInventory().addItem(sluda);
+				}
+				// Если не указан
+				else {
+					player.sendMessage("Не указан артефакт\nNo artifact specified");
+				}
+			}
+			// НЕ УКАЗАНО ДЕЙСТВИЕ
+			else {
+				player.sendMessage("Не указано действие \nNo action specified");
+			}
 		}
-		Sluda sluda = new Sluda();
-		player.getInventory().addItem(sluda);
 		return true;
 	}
 
