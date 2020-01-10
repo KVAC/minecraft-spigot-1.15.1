@@ -32,9 +32,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				} while (true);
 			}
 		};
-		if (backgroundTask == null) {
-			backgroundTask.run();
-		}
+		backgroundTask.run();
+
 	}
 
 	@Override
