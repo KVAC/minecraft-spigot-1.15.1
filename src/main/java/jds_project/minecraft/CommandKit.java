@@ -19,7 +19,10 @@ public class CommandKit implements CommandExecutor {
 			player.sendMessage("You do not have permission 'stalker.artefact.give'");
 			return false;
 		}
-		Sluda sluda = new Sluda(3);
+		for (int i = 0; i < arg3.length; i++) {
+			player.sendMessage(arg3[i]);
+		}
+		Sluda sluda = new Sluda();
 		player.getInventory().addItem(sluda);
 		return true;
 	}

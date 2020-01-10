@@ -15,9 +15,18 @@ public class Sluda extends Artefact {
 	ItemMeta meta;
 
 	public Sluda(int count) {
+		setAmount(count);
+		initSluda();
+	}
+
+	public Sluda() {
+		setAmount(1);
+		initSluda();
+	}
+
+	private void initSluda() {
 
 		a = new ItemStack(Material.SCUTE);
-		setAmount(count);
 		meta = a.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN + "Слюда");
 		setType(Material.SCUTE);
@@ -25,6 +34,5 @@ public class Sluda extends Artefact {
 		lore.add(Sluda.lore0);
 		meta.setLore(lore);
 		this.setItemMeta(meta);
-
 	}
 }

@@ -1,6 +1,7 @@
 package jds_project.minecraft;
 
-import java.io.File;
+import java.util.Collection;
+import java.util.Iterator;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,11 +33,17 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		Player player = event.getPlayer();
 		ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
-		player.sendMessage(new File("").getAbsolutePath());
+		//player.sendMessage(new File("").getAbsolutePath());
+		Collection<? extends Player> players = getServer().getOnlinePlayers();
+		for (Iterator<?> iterator = players.iterator(); iterator.hasNext();) {
+			Player player2 = (Player) iterator.next();
+			player.sendMessage(player2.getName());
+		}
 		// ПКМ
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
 			ArtefactType type = Artefact.recognizeArtedact(itemInHand);
 			if (type != null) {
+				
 			}
 		}
 
