@@ -1,63 +1,46 @@
 package jds_project.minecraft;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import jds_project.minecraft.objects.artefacts.Artefact;
-import jds_project.minecraft.objects.artefacts.Artefact.ArtefactType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
+	BukkitRunnable backgroundTask;
+
 	@Override
 	public void onEnable() {
 		super.onEnable();
 		this.getCommand("artefact").setExecutor(new CommandKit());
 		getServer().getPluginManager().registerEvents(this, this);
+
+		backgroundTask = new BukkitRunnable() {
+			public void run() {
+				do {
+					Collection<? extends Player> players = getServer().getOnlinePlayers();
+					for (Player player : players) {
+						System.err.println(player);
+					}
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} while (true);
+			}
+		};
+		if (backgroundTask == null) {
+			backgroundTask.run();
+		}
 	}
 
 	@Override
 	public void onDisable() {
 		// TODO Auto-generated method stub
 		super.onDisable();
-	}
-
-	@EventHandler
-	public void killed(PlayerInteractEvent event) {
-		Player player = event.getPlayer();
-		ItemStack itemInHand = player.getInventory().getItemInMainHand();
-
-		//player.sendMessage(new File("").getAbsolutePath());
-		Collection<? extends Player> players = getServer().getOnlinePlayers();
-		for (Iterator<?> iterator = players.iterator(); iterator.hasNext();) {
-			Player player2 = (Player) iterator.next();
-			player.sendMessage(player2.getName());
-		}
-		// ПКМ
-		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-			ArtefactType type = Artefact.recognizeArtedact(itemInHand);
-			if (type != null) {
-				
-			}
-		}
-
-		// ЛКМ
-		else if (event.getAction().equals(Action.LEFT_CLICK_AIR)) {
-
-			/*
-			 * if (itemInHand.getType() == Material.ARROW) {// сравниваю со стрелой Material
-			 * item2 = Material.GLOWSTONE; if (player.getInventory().contains(item2)) {//
-			 * если есть светокамень создаю летящую стрелу Entity arrow =
-			 * player.launchProjectile(Arrow.class);
-			 * arrow.setVelocity(player.getLocation().getDirection().multiply(1f)); } }
-			 */
-		}
 	}
 
 }
