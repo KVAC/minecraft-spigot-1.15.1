@@ -41,11 +41,10 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void killed(PlayerInteractEvent event) {
-
+		Player player = event.getPlayer();
+		ItemStack itemInHand = player.getInventory().getItemInMainHand();
+		// ПКМ
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-			Player player = event.getPlayer();
-
-			ItemStack itemInHand = player.getInventory().getItemInMainHand();
 			ArtefactType type = Artefact.recognizeArtedact(itemInHand);
 			if (type != null) {
 				if (type.equals(ArtefactType.SLUDA)) {
@@ -82,17 +81,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					}
 				}
 			}
-
-			if (itemInHand.getType() == Material.ARROW) {// сравниваю со стрелой
-				Material item2 = Material.GLOWSTONE;
-				if (player.getInventory().contains(item2)) {// если есть светокамень создаю летящую стрелу
-					Entity arrow = player.launchProjectile(Arrow.class);
-					// arrow.setGlowing(true);
-					arrow.setVelocity(player.getLocation().getDirection().multiply(1030f));
-
-				}
-
-			} else if (itemInHand.getType() == Material.PHANTOM_MEMBRANE) {// если в руках мембрана
+			if (itemInHand.getType() == Material.PHANTOM_MEMBRANE) {// если в руках мембрана
 				// получаю локацию игрока
 				Location location = event.getPlayer().getLocation();
 				// получаю все сущьности в радиусе 60 блоков
@@ -195,6 +184,19 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				}
 			}
 
+		}
+		// ЛКМ
+		else if (event.getAction().equals(Action.LEFT_CLICK_AIR)) {
+			// СТРЕЛА
+			if (itemInHand.getType() == Material.ARROW) {// сравниваю со стрелой
+				Material item2 = Material.GLOWSTONE;
+				if (player.getInventory().contains(item2)) {// если есть светокамень создаю летящую стрелу
+					Entity arrow = player.launchProjectile(Arrow.class);
+					// arrow.setGlowing(true);
+					arrow.setVelocity(player.getLocation().getDirection().multiply(1030f));
+				}
+
+			}
 		}
 	}
 
