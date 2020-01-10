@@ -88,7 +88,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				if (player.getInventory().contains(item2)) {// если есть светокамень создаю летящую стрелу
 					Entity arrow = player.launchProjectile(Arrow.class);
 					// arrow.setGlowing(true);
-					arrow.setVelocity(player.getLocation().getDirection().multiply(1030f));
+
+					arrow.setVelocity(player.getLocation().getDirection().multiply(1f));
+
 				}
 
 			}
