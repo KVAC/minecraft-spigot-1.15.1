@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
-	Thread backgroundTask;
+	public static Thread backgroundTask;
 
 	@Override
 	public void onEnable() {
@@ -19,17 +19,18 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				Collection<? extends Player> players = getServer().getOnlinePlayers();
-				for (Player player : players) {
-					System.err.println(player);
-				}
-				try {
-					Thread.sleep(3000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				do {
+					Collection<? extends Player> players = getServer().getOnlinePlayers();
+					for (Player player : players) {
+						System.err.println(player);
+					}
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} while (true);
 			}
 		});
 		backgroundTask.start();

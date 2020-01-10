@@ -15,25 +15,25 @@ public class CommandKit implements CommandExecutor {
 		}
 
 		Player player = (Player) sender;
-		if (!player.hasPermission("stalker.artefact.give")) {
+		if (player.hasPermission("stalker.artefact.give")) {
 			player.sendMessage("You do not have permission 'stalker.artefact.give'");
-			return false;
-		}
-		if (arg3.length == 3) {
-			// GIVE
-			if (arg3[0].toLowerCase().equals("give".toLowerCase())) {
-				if (arg3[1].toLowerCase().equals("sluda".toLowerCase())) {
-					Sluda sluda = new Sluda();
-					player.getInventory().addItem(sluda);
+
+			if (arg3.length == 3) {
+				// GIVE
+				if (arg3[0].toLowerCase().equals("give".toLowerCase())) {
+					if (arg3[1].toLowerCase().equals("sluda".toLowerCase())) {
+						Sluda sluda = new Sluda();
+						player.getInventory().addItem(sluda);
+					}
+					// Если не указан
+					else {
+						player.sendMessage("Не указан артефакт\nNo artifact specified");
+					}
 				}
-				// Если не указан
+				// НЕ УКАЗАНО ДЕЙСТВИЕ
 				else {
-					player.sendMessage("Не указан артефакт\nNo artifact specified");
+					player.sendMessage("Не указано действие \nNo action specified");
 				}
-			}
-			// НЕ УКАЗАНО ДЕЙСТВИЕ
-			else {
-				player.sendMessage("Не указано действие \nNo action specified");
 			}
 		}
 		return true;
