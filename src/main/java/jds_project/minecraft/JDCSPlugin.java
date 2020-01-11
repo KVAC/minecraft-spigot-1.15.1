@@ -9,7 +9,7 @@ import jds_project.minecraft.threads.ArtefactInventTask;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
 	ArtefactInventTask artefactInventTask;
-	JDCSPlugin plugin;
+	JDCSPlugin plugin = this;
 
 	@Override
 	public void onEnable() {
