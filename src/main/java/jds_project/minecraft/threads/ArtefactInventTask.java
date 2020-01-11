@@ -3,6 +3,7 @@ package jds_project.minecraft.threads;
 import java.util.Collection;
 
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,17 +31,13 @@ public class ArtefactInventTask extends BukkitRunnable {
 				break;
 			}
 
-			try {
-
-				Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
-				for (Player player : players) {
-					PlayerInventory inventory = player.getInventory();
-					if (inventory.contains(Material.BEDROCK)) {
-						inventory.addItem(new Sluda());
-					}
+			Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
+			for (Player player : players) {
+				PlayerInventory inventory = player.getInventory();
+				if (inventory.contains(Material.BEDROCK)) {
+					player.sendMessage(((CraftPlayer)player).getHandle().locale);
+					inventory.addItem(new Sluda());
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		} while (isStopeed() == false);
 	}
