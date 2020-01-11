@@ -34,6 +34,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		startBackInventory();
 	}
 
+	@Override
+	public void onLoad() {
+		checkAndInitBackInventory();
+	}
+
 	private void stopBackInventory() {
 		if (artefactInventTask != null) {
 			artefactInventTask.cancel();
