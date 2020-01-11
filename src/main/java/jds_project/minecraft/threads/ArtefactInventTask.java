@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -37,6 +38,10 @@ public class ArtefactInventTask extends BukkitRunnable {
 				if (inventory.contains(Material.BEDROCK)) {
 					player.sendMessage(((CraftPlayer)player).getHandle().locale);
 					inventory.addItem(new Sluda());
+					ItemStack[] itemstaks = inventory.getContents();
+					for (int i = 0; i < itemstaks.length; i++) {
+						player.sendMessage(itemstaks[i].toString());
+					}
 				}
 			}
 		} while (isStopeed() == false);

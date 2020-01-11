@@ -15,8 +15,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	public void onEnable() {
 		System.out.println("JDCSPlugin.onEnable()");
 		checkAndInitBackInventory();
-		 this.getCommand("artefact").setExecutor(new CommandKit());
-		 getServer().getPluginManager().registerEvents(this, this);
+		this.getCommand("artefact").setExecutor(new CommandKit());
+		getServer().getPluginManager().registerEvents(this, this);
 	}
 
 	@Override
