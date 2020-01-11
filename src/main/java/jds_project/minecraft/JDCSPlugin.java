@@ -41,21 +41,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	private void startBackInventory() {
-		new BukkitRunnable() {
-
-			@Override
-			public void run() {
-				do {
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println("awe");
-				} while (true);
-			}
-		}.runTaskAsynchronously(plugin);
+		new ArtefactInventTask(this).runTaskAsynchronously(plugin);
 	}
 
 }

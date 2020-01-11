@@ -23,13 +23,13 @@ public class ArtefactInventTask extends BukkitRunnable {
 	@Override
 	public void run() {
 		do {
-			System.out.println(12333);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		} while (stop == false);
-
+			System.out.println("awe222");
+		} while (true);
 	}
+
 }
