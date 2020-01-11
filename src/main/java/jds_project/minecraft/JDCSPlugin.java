@@ -1,10 +1,7 @@
 package jds_project.minecraft;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import jds_project.minecraft.threads.ArtefactInventTask;
 
@@ -41,7 +38,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	private void startBackInventory() {
-		new ArtefactInventTask(this).runTaskAsynchronously(plugin);
+		new ArtefactInventTask().runTaskAsynchronously(this);
 	}
 
 }
