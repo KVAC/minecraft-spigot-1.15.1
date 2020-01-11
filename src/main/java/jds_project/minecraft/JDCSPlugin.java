@@ -13,10 +13,23 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@Override
 	public void onEnable() {
-		checkAndInitBackInventory();
-		this.getCommand("artefact").setExecutor(new CommandKit());
+		System.out.println("JDCSPlugin.onEnable()");
+		// checkAndInitBackInventory();
+		// this.getCommand("artefact").setExecutor(new CommandKit());
 
-		getServer().getPluginManager().registerEvents(this, this);
+		// getServer().getPluginManager().registerEvents(this, this);
+	}
+
+	@Override
+	public void onLoad() {
+	//	checkAndInitBackInventory();
+		System.out.println("JDCSPlugin.onLoad()");
+	}
+
+	@Override
+	public void onDisable() {
+		// stopBackInventory();
+		System.out.println("JDCSPlugin.onDisable()");
 	}
 
 	@EventHandler
@@ -24,19 +37,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	}
 
-	@Override
-	public void onDisable() {
-		stopBackInventory();
-	}
-
 	private void checkAndInitBackInventory() {
 		stopBackInventory();
 		startBackInventory();
-	}
-
-	@Override
-	public void onLoad() {
-		checkAndInitBackInventory();
 	}
 
 	private void stopBackInventory() {
