@@ -4,8 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import jds_project.minecraft.objects.artefacts.Sluda;
+import jds_project.minecraft.permissions.Permissions;
 
 public class CommandKit implements CommandExecutor {
 
@@ -15,14 +15,23 @@ public class CommandKit implements CommandExecutor {
 		}
 
 		Player player = (Player) sender;
-		if (player.hasPermission("stalker.artefact.give")) {
-			player.sendMessage("You do not have permission 'stalker.artefact.give'");
-
-			if (arg3.length == 3) {
+		if (player.hasPermission(Permissions.STALKER_ARTEFACT_GIVE)) {
+			if (arg3.length >= 2) {
 				// GIVE
 				if (arg3[0].toLowerCase().equals("give".toLowerCase())) {
+
 					if (arg3[1].toLowerCase().equals("sluda".toLowerCase())) {
-						Sluda sluda = new Sluda();
+						// КОЛВО
+						int count = 1;
+						if (arg3.length == 3) {
+							if (arg3[2] != null) {
+								try {
+									count = Integer.parseInt(arg3[2]);
+								} catch (Exception e) {
+								}
+							}
+						} // КОЛВО
+						Sluda sluda = new Sluda(count);
 						player.getInventory().addItem(sluda);
 					}
 					// Если не указан
@@ -35,6 +44,8 @@ public class CommandKit implements CommandExecutor {
 					player.sendMessage("Не указано действие \nNo action specified");
 				}
 			}
+		} else {
+			player.sendMessage("You do not have permission '" + Permissions.STALKER_ARTEFACT_GIVE + "'");
 		}
 		return true;
 	}

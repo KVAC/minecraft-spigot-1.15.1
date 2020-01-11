@@ -3,7 +3,6 @@ package jds_project.minecraft.threads;
 import java.util.Collection;
 
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -39,7 +38,7 @@ public class ArtefactInventTask extends BukkitRunnable {
 				PlayerInventory inventory = player.getInventory();
 				if (inventory.contains(Material.BEDROCK)) {
 					try {
-						player.sendMessage(((CraftPlayer) player).getHandle().locale);
+						// player.sendMessage(((CraftPlayer) player).getHandle().locale);
 						inventory.addItem(new Sluda());
 
 					} catch (Exception e) {
