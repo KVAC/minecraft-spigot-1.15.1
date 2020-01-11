@@ -36,11 +36,13 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	private void stopBackInventory() {
-		try {
-			backgroundTask.setStop(true);
-			backgroundTask.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (backgroundTask != null) {
+			try {
+				backgroundTask.setStop(true);
+				backgroundTask.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
