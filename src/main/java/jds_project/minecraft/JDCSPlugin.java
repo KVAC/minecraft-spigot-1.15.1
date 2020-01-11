@@ -14,21 +14,20 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		System.out.println("JDCSPlugin.onEnable()");
-		// checkAndInitBackInventory();
+		checkAndInitBackInventory();
 		// this.getCommand("artefact").setExecutor(new CommandKit());
-
 		// getServer().getPluginManager().registerEvents(this, this);
 	}
 
 	@Override
 	public void onLoad() {
-	//	checkAndInitBackInventory();
+		stopBackInventory();
 		System.out.println("JDCSPlugin.onLoad()");
 	}
 
 	@Override
 	public void onDisable() {
-		// stopBackInventory();
+		stopBackInventory();
 		System.out.println("JDCSPlugin.onDisable()");
 	}
 
