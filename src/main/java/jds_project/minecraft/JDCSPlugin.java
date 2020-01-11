@@ -46,7 +46,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	private void startBackInventory() {
-		artefactInventTask = new ArtefactInventTask();
+		artefactInventTask = new ArtefactInventTask(plugin);
 		artefactInventTask.runTaskAsynchronously(this);
 	}
 

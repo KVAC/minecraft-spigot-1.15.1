@@ -1,9 +1,22 @@
 package jds_project.minecraft.threads;
 
+import java.util.Collection;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import jds_project.minecraft.JDCSPlugin;
+import jds_project.minecraft.objects.artefacts.Sluda;
 
 public class ArtefactInventTask extends BukkitRunnable {
 	private boolean stopeed = false;
+	private JDCSPlugin main;
+
+	public ArtefactInventTask(JDCSPlugin plugin) {
+		this.main=plugin;
+	}
 
 	@Override
 	public void run() {
@@ -16,7 +29,14 @@ public class ArtefactInventTask extends BukkitRunnable {
 			if (stopeed == true) {
 				break;
 			}
-			System.out.println("awe222");
+			Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
+			for (Player player : players) {
+				PlayerInventory inventory = player.getInventory();
+				if (inventory.contains(Material.BEDROCK)) {
+					inventory.addItem(new Sluda());
+				}
+			}
+			
 		} while (isStopeed() == false);
 	}
 
