@@ -15,7 +15,7 @@ public class ArtefactInventTask extends BukkitRunnable {
 	private JDCSPlugin main;
 
 	public ArtefactInventTask(JDCSPlugin plugin) {
-		this.main=plugin;
+		this.main = plugin;
 	}
 
 	@Override
@@ -29,14 +29,19 @@ public class ArtefactInventTask extends BukkitRunnable {
 			if (stopeed == true) {
 				break;
 			}
-			Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
-			for (Player player : players) {
-				PlayerInventory inventory = player.getInventory();
-				if (inventory.contains(Material.BEDROCK)) {
-					inventory.addItem(new Sluda());
+
+			try {
+
+				Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
+				for (Player player : players) {
+					PlayerInventory inventory = player.getInventory();
+					if (inventory.contains(Material.BEDROCK)) {
+						inventory.addItem(new Sluda());
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			
 		} while (isStopeed() == false);
 	}
 
