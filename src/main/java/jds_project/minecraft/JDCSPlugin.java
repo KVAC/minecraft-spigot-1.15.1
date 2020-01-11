@@ -37,6 +37,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			backgroundTask = null;
 		}
 		backgroundTask = new ArtefactInventTask(this);
+		backgroundTask.start();
 
 	}
 
