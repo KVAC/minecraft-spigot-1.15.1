@@ -32,7 +32,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	private void checkAndInitBackInventory() {
 		if (backgroundTask != null) {
-			System.exit(0);
+			System.err.println(000000000000000000l);
 			backgroundTask.interrupt();
 			backgroundTask = null;
 		}
