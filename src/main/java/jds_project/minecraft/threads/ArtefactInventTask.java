@@ -57,9 +57,12 @@ public class ArtefactInventTask extends BukkitRunnable {
 								if (typeART != null) {
 									double count = (double) itemStack.getAmount();
 									double currentHealth = player.getHealth();
+
 									if (typeART.equals(ArtefactType.SLUDA)) {
-										if ((currentHealth + count) < 20 && (currentHealth + count) > 0) {
+										if ((currentHealth + count) <= 20) {
 											player.setHealth(currentHealth + count);
+										} else if ((currentHealth + count) == 20) {
+											player.setHealth(20);
 										}
 									}
 								}
