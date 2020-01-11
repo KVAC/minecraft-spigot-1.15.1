@@ -11,6 +11,7 @@ import jds_project.minecraft.objects.artefacts.Sluda;
 
 public class ArtefactInventTask extends Thread implements Runnable {
 	JDCSPlugin plugin;
+	private boolean stop = false;
 
 	public ArtefactInventTask(JDCSPlugin jdcsPlugin) {
 		this.plugin = jdcsPlugin;
@@ -38,5 +39,13 @@ public class ArtefactInventTask extends Thread implements Runnable {
 				e.printStackTrace();
 			}
 		} while (true);
+	}
+
+	public boolean isStop() {
+		return stop;
+	}
+
+	public void setStop(boolean stop) {
+		this.stop = stop;
 	}
 }

@@ -6,13 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import jds_project.minecraft.threads.ArtefactInventTask;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
-	public static Thread backgroundTask;
+	public static ArtefactInventTask backgroundTask;
 
 	@Override
 	public void onEnable() {
 		checkAndInitBackInventory();
-		System.err.println(11111111111l);
-		super.onEnable();
 		this.getCommand("artefact").setExecutor(new CommandKit());
 		getServer().getPluginManager().registerEvents(this, this);
 	}
@@ -24,21 +22,26 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
-		if (backgroundTask != null) {
-			backgroundTask.interrupt();
-		}
-		backgroundTask = null;
+		stopBackInventory();
 	}
 
 	private void checkAndInitBackInventory() {
-		if (backgroundTask != null) {
-			System.err.println(000000000000000000l);
-			backgroundTask.interrupt();
-			backgroundTask = null;
-		}
+		stopBackInventory();
+		startBackInventory();
+	}
+
+	private void startBackInventory() {
 		backgroundTask = new ArtefactInventTask(this);
 		backgroundTask.start();
+	}
 
+	private void stopBackInventory() {
+		try {
+			backgroundTask.setStop(true);
+			backgroundTask.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
