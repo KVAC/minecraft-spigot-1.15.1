@@ -33,6 +33,7 @@ public class ArtefactInventTask extends Thread implements Runnable {
 			}
 
 			players = null;
+			System.err.println(123);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
