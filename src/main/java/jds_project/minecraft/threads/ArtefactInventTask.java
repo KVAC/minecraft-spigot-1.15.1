@@ -43,7 +43,9 @@ public class ArtefactInventTask extends BukkitRunnable {
 						ItemStack[] itemstaks = inventory.getStorageContents();
 						if (itemstaks.length > 0) {
 							for (int i = 0; i < itemstaks.length; i++) {
-								player.sendMessage(itemstaks[i].toString());
+								if (itemstaks[i] != null) {
+									player.sendMessage(itemstaks[i].toString());
+								}
 							}
 						}
 					} catch (Exception e) {
