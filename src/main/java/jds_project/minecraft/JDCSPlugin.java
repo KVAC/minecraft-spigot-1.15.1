@@ -13,7 +13,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@Override
 	public void onEnable() {
-		startBackInventory();
+		checkAndInitBackInventory();
 		this.getCommand("artefact").setExecutor(new CommandKit());
 
 		getServer().getPluginManager().registerEvents(this, this);
@@ -26,10 +26,23 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
+		stopBackInventory();
+	}
+
+	private void checkAndInitBackInventory() {
+		stopBackInventory();
+		startBackInventory();
+	}
+
+	private void stopBackInventory() {
+		if (artefactInventTask != null) {
+			artefactInventTask.cancel();
+		}
 	}
 
 	private void startBackInventory() {
-		new ArtefactInventTask().runTaskAsynchronously(this);
+		artefactInventTask = new ArtefactInventTask();
+		artefactInventTask.runTaskAsynchronously(this);
 	}
 
 }
