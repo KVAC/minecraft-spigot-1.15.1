@@ -40,7 +40,7 @@ public class ArtefactInventTask extends BukkitRunnable {
 						player.sendMessage(((CraftPlayer) player).getHandle().locale);
 						inventory.addItem(new Sluda());
 
-						ItemStack[] itemstaks = inventory.getContents();
+						ItemStack[] itemstaks = inventory.getStorageContents();
 						if (itemstaks.length > 0) {
 							for (int i = 0; i < itemstaks.length; i++) {
 								player.sendMessage(itemstaks[i].toString());
