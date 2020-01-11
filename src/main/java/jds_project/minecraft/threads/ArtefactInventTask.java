@@ -36,11 +36,15 @@ public class ArtefactInventTask extends BukkitRunnable {
 			for (Player player : players) {
 				PlayerInventory inventory = player.getInventory();
 				if (inventory.contains(Material.BEDROCK)) {
-					player.sendMessage(((CraftPlayer)player).getHandle().locale);
-					inventory.addItem(new Sluda());
-					ItemStack[] itemstaks = inventory.getContents();
-					for (int i = 0; i < itemstaks.length; i++) {
-						player.sendMessage(itemstaks[i].toString());
+					try {
+						player.sendMessage(((CraftPlayer) player).getHandle().locale);
+						inventory.addItem(new Sluda());
+						ItemStack[] itemstaks = inventory.getContents();
+						for (int i = 0; i < itemstaks.length; i++) {
+							player.sendMessage(itemstaks[i].toString());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			}
