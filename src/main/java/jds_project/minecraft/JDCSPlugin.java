@@ -1,64 +1,117 @@
 package jds_project.minecraft;
 
-import java.util.Collection;
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
+import java.util.logging.Logger;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import jds_project.minecraft.objects.artefacts.Sluda;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
 	public static Thread backgroundTask;
 
 	@Override
-	public void onEnable() {
-		super.onEnable();
-		this.getCommand("artefact").setExecutor(new CommandKit());
-		getServer().getPluginManager().registerEvents(this, this);
-		initBackGround();
+	public PluginCommand getCommand(String name) {
+		// TODO Auto-generated method stub
+		return super.getCommand(name);
 	}
 
 	@Override
-	public void reloadConfig() {
-		System.err.println(
-				"111111111111111111111111\\n1111111111111111111111111111111111111111\\n1111111111111111111111111\\n111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111\\n1111111111111111111111111111111111111111111111\\n1111111111111111111111111111111111\\n1111111111111111111111\n1111111111111111111111111111111111111111111111111111111111111111111111111111111");
-		super.reloadConfig();
+	public FileConfiguration getConfig() {
+		// TODO Auto-generated method stub
+		return super.getConfig();
 	}
 
-	private void initBackGround() {
-		backgroundTask = new Thread(new Runnable() {
+	@Override
+	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
+		// TODO Auto-generated method stub
+		return super.getDefaultWorldGenerator(worldName, id);
+	}
 
-			@Override
-			public void run() {
-				do {
-					Collection<? extends Player> players = getServer().getOnlinePlayers();
-					for (Player player : players) {
-						PlayerInventory inventory = player.getInventory();
-						if (inventory.contains(Material.STONE)) {
-							inventory.addItem(new Sluda(1));
+	@Override
+	protected File getFile() {
+		// TODO Auto-generated method stub
+		return super.getFile();
+	}
 
-						}
-						inventory.getStorageContents();
-					}
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				} while (true);
-			}
-		});
-		backgroundTask.start();
+	@Override
+	public Logger getLogger() {
+		// TODO Auto-generated method stub
+		return super.getLogger();
+	}
 
+	@Override
+	public InputStream getResource(String filename) {
+		// TODO Auto-generated method stub
+		return super.getResource(filename);
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		// TODO Auto-generated method stub
+		return super.onCommand(sender, command, label, args);
 	}
 
 	@Override
 	public void onDisable() {
 		// TODO Auto-generated method stub
 		super.onDisable();
+	}
+
+	@Override
+	public void onLoad() {
+		System.err.println(12312323);
+		System.exit(0);
+		super.onLoad();
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		// TODO Auto-generated method stub
+		return super.onTabComplete(sender, command, alias, args);
+	}
+
+	@Override
+	public void reloadConfig() {
+		// TODO Auto-generated method stub
+		super.reloadConfig();
+	}
+
+	@Override
+	public void saveConfig() {
+		// TODO Auto-generated method stub
+		super.saveConfig();
+	}
+
+	@Override
+	public void saveDefaultConfig() {
+		// TODO Auto-generated method stub
+		super.saveDefaultConfig();
+	}
+
+	@Override
+	public void saveResource(String resourcePath, boolean replace) {
+		// TODO Auto-generated method stub
+		super.saveResource(resourcePath, replace);
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+
+	@Override
+	public void onEnable() {
+		super.onEnable();
+		this.getCommand("artefact").setExecutor(new CommandKit());
+		getServer().getPluginManager().registerEvents(this, this);
 	}
 
 }
