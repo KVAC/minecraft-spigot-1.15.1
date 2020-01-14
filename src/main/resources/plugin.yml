@@ -5,4 +5,4 @@ api-version: 1.13
 commands:
    artefact:
       description: Your description
-      usage: /artefact give <type> <player>
+      usage: /artefact give <player> <type> <count>

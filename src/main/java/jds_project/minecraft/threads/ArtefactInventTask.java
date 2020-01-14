@@ -9,9 +9,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import jds_project.minecraft.JDCSPlugin;
-import jds_project.minecraft.objects.artefacts.Artefact;
-import jds_project.minecraft.objects.artefacts.Artefact.ArtefactType;
 import jds_project.minecraft.objects.artefacts.Sluda;
+import jds_project.minecraft.objects.artefacts.sample.Artefact;
+import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
 
 public class ArtefactInventTask extends BukkitRunnable {
 	private boolean stopeed = false;

@@ -20,9 +20,9 @@
 	<build>
 		<resources>
 			<resource>
-				 <directory>src/main/resources</directory> 
+				<directory>src/main/resources</directory>
 				<includes>
-			
+
 					<include>plugin.yml</include>
 				</includes>
 			</resource>
@@ -32,6 +32,8 @@
 
 	</build>
 	<dependencies>
+
+
 		<!--This adds the Spigot API artifact to the build -->
 		<dependency>
 			<groupId>org.spigotmc</groupId>
