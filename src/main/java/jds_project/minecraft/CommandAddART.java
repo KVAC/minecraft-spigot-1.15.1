@@ -22,10 +22,8 @@ public class CommandAddART implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command arg1, String arg2, String[] cmdArgs) {
 		StringBuilder errorBuilder = new StringBuilder();
 		try {
-			if (!(sender instanceof Player)) {
-				return false;
-			}
-			Player playerSender = (Player) sender;
+			CommandSender playerSender = sender;
+
 			if (cmdArgs.length == 0) {
 				return false;
 			}
@@ -77,11 +75,11 @@ public class CommandAddART implements CommandExecutor {
 			playerSender.sendMessage("cmd:" + cmd + " кому:" + playerTo + " что:" + addWhat + " сколько:" + count);
 
 			if (addWhat.equals(ArtefactType.SLUDA)) {
-				playerSender.getInventory().addItem(new Sluda(count));
+				playerTo.getInventory().addItem(new Sluda(count));
 			} else if (addWhat.equals(ArtefactType.OBJECT639)) {
-				playerSender.getInventory().addItem(new Object639(count));
+				playerTo.getInventory().addItem(new Object639(count));
 			} else if (addWhat.equals(ArtefactType.PILLOW)) {
-				playerSender.getInventory().addItem(new Pillow(count));
+				playerTo.getInventory().addItem(new Pillow(count));
 			}
 
 		} catch (Exception e) {
