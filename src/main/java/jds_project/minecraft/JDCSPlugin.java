@@ -1,7 +1,7 @@
 package jds_project.minecraft;
 
 import org.apache.commons.validator.routines.InetAddressValidator;
-import org.apache.commons.validator.routines.UrlValidator;
+import org.apache.commons.validator.UrlValidator;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -18,6 +18,7 @@ import jds_project.minecraft.objects.artefacts.sample.Artefact;
 import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
 import jds_project.minecraft.threads.ArtefactInventTask;
 
+@SuppressWarnings("deprecation")
 public class JDCSPlugin extends JavaPlugin implements Listener {
 	ArtefactInventTask artefactInventTask;
 	JDCSPlugin plugin = this;
