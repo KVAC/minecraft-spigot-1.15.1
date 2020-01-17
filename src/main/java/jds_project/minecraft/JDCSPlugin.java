@@ -1,5 +1,7 @@
 package jds_project.minecraft;
 
+import java.net.URL;
+
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -50,7 +52,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	public static boolean containsLink(String input) {
-		// return new UrlValidator().isValid(input);
+		try {
+			new URL(input).toURI();
+		} catch (Exception e) {
+			return false;
+		}
 		return false;
 	}
 
@@ -62,12 +68,38 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			}
 			String[] splitedIP = splited[i].split(":");
 			for (int j = 0; j < splitedIP.length; j++) {
-				if (new InetAddressValidator().isValid(splitedIP[j])) {
+				if (validIP(splitedIP[j])) {
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+
+	public static boolean validIP(String ip) {
+		try {
+			if (ip == null || ip.isEmpty()) {
+				return false;
+			}
+
+			String[] parts = ip.split("\\.");
+			if (parts.length != 4) {
+				return false;
+			}
+			for (String s : parts) {
+				int i = Integer.parseInt(s);
+				if ((i < 0) || (i > 255)) {
+					return false;
+				}
+			}
+			if (ip.endsWith(".")) {
+				return false;
+			}
+
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
 	}
 
 	@EventHandler
