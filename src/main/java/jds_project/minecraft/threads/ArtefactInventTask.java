@@ -3,6 +3,7 @@ package jds_project.minecraft.threads;
 import java.util.Collection;
 
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -12,10 +13,20 @@ import jds_project.minecraft.JDCSPlugin;
 import jds_project.minecraft.objects.artefacts.Sluda;
 import jds_project.minecraft.objects.artefacts.sample.Artefact;
 import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
+import net.minecraft.server.v1_15_R1.PacketPlayInClientCommand;
+import net.minecraft.server.v1_15_R1.PacketPlayInClientCommand.EnumClientCommand;
 
 public class ArtefactInventTask extends BukkitRunnable {
 	private boolean stopeed = false;
 	private JDCSPlugin main;
+
+	public JDCSPlugin getMain() {
+		return main;
+	}
+
+	public void setMain(JDCSPlugin main) {
+		this.main = main;
+	}
 
 	public ArtefactInventTask(JDCSPlugin plugin) {
 		this.main = plugin;
@@ -24,6 +35,7 @@ public class ArtefactInventTask extends BukkitRunnable {
 	@Override
 	public void run() {
 		do {
+
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -34,7 +46,15 @@ public class ArtefactInventTask extends BukkitRunnable {
 			}
 
 			Collection<? extends Player> players = this.main.getServer().getOnlinePlayers();
+
 			for (Player player : players) {
+				/*
+				 * // RESPAWN if (player.isDead()) { try { ((CraftPlayer)
+				 * player).getHandle().playerConnection .a(new
+				 * PacketPlayInClientCommand(EnumClientCommand.PERFORM_RESPAWN)); } catch
+				 * (Exception e) { e.printStackTrace(); } } // RESPAWN
+				 */
+				// ART
 				PlayerInventory inventory = player.getInventory();
 				if (inventory.contains(Material.BEDROCK)) {
 					try {

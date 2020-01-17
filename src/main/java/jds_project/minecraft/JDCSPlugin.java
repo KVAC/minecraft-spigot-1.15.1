@@ -1,5 +1,7 @@
 package jds_project.minecraft;
 
+import org.apache.commons.validator.routines.InetAddressValidator;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -7,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,6 +43,34 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	}
 
 	@EventHandler
+	public void antiSpam(AsyncPlayerChatEvent event) {
+		if (spamContains(event.getMessage())) {
+			event.getPlayer().sendMessage("NAX");
+			event.setCancelled(true);
+		}
+	}
+
+	public static boolean containsLink(String input) {
+		return new UrlValidator().isValid(input);
+	}
+
+	public static boolean spamContains(String forCheck) {
+		String[] splited = forCheck.split(" ");
+		for (int i = 0; i < splited.length; i++) {
+			if (containsLink(splited[i])) {
+				return true;
+			}
+			String[] splitedIP = splited[i].split(":");
+			for (int j = 0; j < splitedIP.length; j++) {
+				if (new InetAddressValidator().isValid(splitedIP[j])) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@EventHandler
 	private void name(EntityDamageEvent event) {
 		if (event.getCause().equals(DamageCause.FALL)) {
 			Entity entity = event.getEntity();
@@ -58,9 +89,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 							if (typeART != null) {
 								int count = itemStack.getAmount();
 								if (typeART.equals(ArtefactType.PILLOW)) {
+									double defaultHEAL = 0.1119;
 									if (damage > 19.3) {
 										event.setDamage(0);
-										double defaultHEAL = 0.1119;
 										double addHeal = ((double) count * 0.5)
 												+ ((double) count * 0.5) / 100 * defaultHEAL;
 										player.sendMessage("" + addHeal);
@@ -69,6 +100,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 										} else if (addHeal <= 20) {
 											player.setHealth(addHeal);
 										}
+									} else {
+										event.setDamage(0);
 									}
 								}
 							}

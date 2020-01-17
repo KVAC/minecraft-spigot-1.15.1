@@ -76,10 +76,13 @@ public class CommandAddART implements CommandExecutor {
 
 			if (addWhat.equals(ArtefactType.SLUDA)) {
 				playerTo.getInventory().addItem(new Sluda(count));
+				playerTo.sendMessage(playerSender.getName() + " выдал вам " + addWhat + " в кол-ве:" + count);
 			} else if (addWhat.equals(ArtefactType.OBJECT639)) {
 				playerTo.getInventory().addItem(new Object639(count));
+				playerTo.sendMessage(playerSender.getName() + " выдал вам " + addWhat + " в кол-ве:" + count);
 			} else if (addWhat.equals(ArtefactType.PILLOW)) {
 				playerTo.getInventory().addItem(new Pillow(count));
+				playerTo.sendMessage(playerSender.getName() + " выдал вам " + addWhat + " в кол-ве:" + count);
 			}
 
 		} catch (Exception e) {

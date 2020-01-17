@@ -32,7 +32,11 @@
 
 	</build>
 	<dependencies>
-
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
+		</dependency>
 
 		<!--This adds the Spigot API artifact to the build -->
 		<dependency>
