@@ -37,12 +37,13 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	private ProtocolManager protocolManager;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable() {
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		protocolManager.addPacketListener((PacketListener) new PacketAdapter(
 				// FIXME возможно PacketType.Status.Server.OUT_SERVER_INFO а не PONG
-				PacketAdapter.params((Plugin) this, new PacketType[] { PacketType.Status.Server.PONG }).optionAsync()) {
+				PacketAdapter.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO }).optionAsync()) {
 			public void onPacketSending(PacketEvent event) {
 				WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
 				ping.setPlayersMaximum(20000);
