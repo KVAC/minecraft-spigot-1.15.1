@@ -43,20 +43,24 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		protocolManager.addPacketListener((PacketListener) new PacketAdapter(
 				// FIXME возможно PacketType.Status.Server.OUT_SERVER_INFO а не PONG
-				PacketAdapter.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO }).optionAsync()) {
+				PacketAdapter.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO })
+						.optionAsync()) {
 			public void onPacketSending(PacketEvent event) {
-				WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
-				ping.setPlayersMaximum(20000);
-				boolean random = true;
-				int fake = 140;
-				int min = 40;
-				int max = 2000;
-				if (random) {
-					Random r = new Random();
-					int online = Math.abs(r.nextInt() % (max - min) + 1 + min);
-					ping.setPlayersOnline(online);
-				} else {
-					ping.setPlayersOnline(fake);
+				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
+
+					WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
+					ping.setPlayersMaximum(20000);
+					boolean random = true;
+					int fake = 140;
+					int min = 40;
+					int max = 2000;
+					if (random) {
+						Random r = new Random();
+						int online = Math.abs(r.nextInt() % (max - min) + 1 + min);
+						ping.setPlayersOnline(online);
+					} else {
+						ping.setPlayersOnline(fake);
+					}
 				}
 			}
 		});
