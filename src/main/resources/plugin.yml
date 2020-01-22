@@ -2,6 +2,7 @@ name: stalker
 main: jds_project.minecraft.JDCSPlugin
 version: 1
 api-version: 1.13
+depend: [ProtocolLib]
 commands:
    artefact:
       description: Your description
