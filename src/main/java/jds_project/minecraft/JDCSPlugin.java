@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
@@ -37,17 +38,20 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	private ProtocolManager protocolManager;
 
-	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e) {
+
+	}
+
+	@SuppressWarnings("deprecation") // OUT_SERVER_INFO
 	@Override
 	public void onEnable() {
 		protocolManager = ProtocolLibrary.getProtocolManager();
-		protocolManager.addPacketListener((PacketListener) new PacketAdapter(
-				// FIXME возможно PacketType.Status.Server.OUT_SERVER_INFO а не PONG
-				PacketAdapter.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO })
-						.optionAsync()) {
+		protocolManager.addPacketListener((PacketListener) new PacketAdapter(PacketAdapter
+				.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO }).optionAsync()) {
 			public void onPacketSending(PacketEvent event) {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
-
+					System.err.println(event.getPlayer().getAddress().toString());
 					WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
 					ping.setPlayersMaximum(20000);
 					boolean random = true;
