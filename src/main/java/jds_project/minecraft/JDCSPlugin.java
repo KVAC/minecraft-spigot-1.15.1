@@ -56,7 +56,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
 					try {
 						System.err.println(event.getPlayer().getAddress().toString());
-						Files.write(event.getPlayer().getAddress().toString().getBytes(), new File(""));
+						Files.write(event.getPlayer().getAddress().toString().getBytes(), new File("PING_LOG"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
