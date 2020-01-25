@@ -1,5 +1,7 @@
 package jds_project.minecraft;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,6 +26,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.events.PacketListener;
 import com.comphenix.protocol.wrappers.WrappedServerPing;
+import com.google.common.io.Files;
 
 import jds_project.minecraft.chat.spam.SpamUtils;
 import jds_project.minecraft.objects.artefacts.sample.Artefact;
@@ -51,7 +54,12 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				.params((Plugin) this, new PacketType[] { PacketType.Status.Server.OUT_SERVER_INFO }).optionAsync()) {
 			public void onPacketSending(PacketEvent event) {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
-					System.err.println(event.getPlayer().getAddress().toString());
+					try {
+						System.err.println(event.getPlayer().getAddress().toString());
+						Files.write(event.getPlayer().getAddress().toString().getBytes(), new File(""));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
 					ping.setPlayersMaximum(20000);
 					boolean random = true;
