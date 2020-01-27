@@ -49,6 +49,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	}
 
+	boolean random = true;
+	int fake = 140;
+	int min = 40;
+	int max = 20000;
+
 	@SuppressWarnings("deprecation") // OUT_SERVER_INFO
 	@Override
 	public void onEnable() {
@@ -58,7 +63,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			public void onPacketSending(PacketEvent event) {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
 					try {
-						System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
+						//System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
 						Files.write(new File("PING_LOG").toPath(),
 								(event.getPlayer().getAddress().toString() + '\n').getBytes(),
 								StandardOpenOption.APPEND);
@@ -68,11 +73,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					}
 					if (fakeOnline) {
 						WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
-						ping.setPlayersMaximum(20000);
-						boolean random = true;
-						int fake = 140;
-						int min = 40;
-						int max = 2000;
+						ping.setPlayersMaximum(max);
+
 						if (random) {
 							Random r = new Random();
 							int online = Math.abs(r.nextInt() % (max - min) + 1 + min);
