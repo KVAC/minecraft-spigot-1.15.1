@@ -174,8 +174,10 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void ArrowLaunch(PlayerToggleSneakEvent event) {
-		Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
-		projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
+		if (event.getPlayer().isFlying()) {
+			Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
+			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
+		}
 
 	}
 
