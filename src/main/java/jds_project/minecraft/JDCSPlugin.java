@@ -178,7 +178,17 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		if (event.getPlayer().isGliding()) {
 			Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
+			if (event.getPlayer().getInventory().getItemInMainHand().getData().getClass()
+					.equals(Material.NETHER_STAR.getClass())) {
+				event.getPlayer().sendMessage("111111111111");
+			}
 		}
+	}
+
+	private static double randDouble(double min, double max) {
+		Random r = new Random();
+		double randomValue = min + (max - min) * r.nextDouble();
+		return randomValue;
 	}
 
 	private void stopBackInventory() {
