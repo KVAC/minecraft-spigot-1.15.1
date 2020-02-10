@@ -182,7 +182,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
 			
 			if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.NETHER_STAR)) {
-				for (int i = 0; i <= 30; i++) {
+				for (int i = 0; i <= 300; i++) {
 					Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 					Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
 					vel.setX(vel.getX() + randDouble(-10, 10));
