@@ -188,8 +188,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					vel.setX(vel.getX() + randDouble(-10, 10));
 					vel.setY(vel.getY() + randDouble(-10, 10));
 					vel.setZ(vel.getZ() + randDouble(-10, 10));
-
+					
 					projectile2.setVelocity(vel);
+					projectile.setTicksLived(20*20);
 				}
 			}
 
