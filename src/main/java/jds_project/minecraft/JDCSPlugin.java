@@ -12,9 +12,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -63,7 +65,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			public void onPacketSending(PacketEvent event) {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
 					try {
-						//System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
+						// System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
 						Files.write(new File("PING_LOG").toPath(),
 								(event.getPlayer().getAddress().toString() + '\n').getBytes(),
 								StandardOpenOption.APPEND);
@@ -74,7 +76,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					if (fakeOnline) {
 						WrappedServerPing ping = (WrappedServerPing) event.getPacket().getServerPings().read(0);
 						ping.setPlayersMaximum(max);
-
 						if (random) {
 							Random r = new Random();
 							int online = Math.abs(r.nextInt() % (max - min) + 1 + min);
@@ -165,6 +166,13 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	private void checkAndInitBackInventory() {
 		stopBackInventory();
 		startBackInventory();
+	}
+
+	@EventHandler
+	public void ArrowLaunch(PlayerInteractEvent event) {
+		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+			event.getPlayer().sendMessage(Action.LEFT_CLICK_AIR.toString());
+		}
 	}
 
 	private void stopBackInventory() {
