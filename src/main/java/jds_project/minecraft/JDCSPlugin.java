@@ -9,8 +9,10 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -172,9 +174,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void ArrowLaunch(PlayerToggleSneakEvent event) {
-//		event.getPlayer().sendMessage(ChatColor.GREEN + Action.RIGHT_CLICK_AIR.toString());
-		event.getPlayer().sendMessage("PlayerToggleSneakEvent");
-		
+		Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
+		projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
+
 	}
 
 	private void stopBackInventory() {
