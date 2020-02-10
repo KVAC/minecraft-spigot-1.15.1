@@ -21,6 +21,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -174,11 +175,10 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void ArrowLaunch(PlayerToggleSneakEvent event) {
-		if (event.getPlayer().isFlying()) {
+		if (event.getPlayer().isGliding()) {
 			Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
 		}
-
 	}
 
 	private void stopBackInventory() {
