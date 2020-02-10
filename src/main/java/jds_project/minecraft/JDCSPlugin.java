@@ -27,6 +27,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -181,6 +182,14 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			if (event.getPlayer().getInventory().getItemInMainHand().getData().getClass()
 					.equals(Material.NETHER_STAR.getClass())) {
 				event.getPlayer().sendMessage("111111111111");
+				for (int i = 0; i <= 100; i++) {
+					Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+					Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+
+					vel.setX(vel.getX() * randDouble(1, 3));
+
+					projectile2.setVelocity(vel);
+				}
 			}
 		}
 	}
