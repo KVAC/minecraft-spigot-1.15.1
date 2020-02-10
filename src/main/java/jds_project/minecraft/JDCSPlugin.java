@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -171,7 +172,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void ArrowLaunch(PlayerInteractEvent event) {
 		if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-			event.getPlayer().sendMessage(Action.LEFT_CLICK_AIR.toString());
+			event.getPlayer().sendMessage(ChatColor.GREEN + Action.RIGHT_CLICK_AIR.toString());
+		} else if (event.getAction().equals(Action.LEFT_CLICK_AIR)) {
+			event.getPlayer().sendMessage(ChatColor.RED + Action.LEFT_CLICK_AIR.toString());
 		}
 	}
 
