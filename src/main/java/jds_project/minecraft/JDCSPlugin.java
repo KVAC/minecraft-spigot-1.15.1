@@ -217,6 +217,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					LivingEntity entity = (LivingEntity) event.getEntity();
 					PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 20 * 10 * 60, 3);
 					entity.addPotionEffect(effect);
+					event.setDamage(3);
 				}
 			} else if (arrow.getName().equals(Material.DIAMOND_SWORD.toString())) {
 				event.setDamage(10000);
