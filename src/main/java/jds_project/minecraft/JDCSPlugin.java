@@ -265,6 +265,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setY(vel.getY() + randDouble(-10, 10));
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
+								projectile2.setCustomName(itemInMainHand.toString());
+								projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -278,6 +280,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setY(vel.getY() + randDouble(-10, 10));
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
+								projectile2.setCustomName(itemInMainHand.toString());
+								projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -291,6 +295,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setY(vel.getY() + randDouble(-10, 10));
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
+								projectile2.setCustomName(itemInMainHand.toString());
+								projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -302,6 +308,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 							vel.setY(vel.getY() + randDouble(-4, 4));
 							vel.setZ(vel.getZ() + randDouble(-4, 4));
 
+							projectile2.setCustomName(itemInMainHand.toString());
+							projectile2.setCustomNameVisible(true);
 							projectile2.setVelocity(vel);
 							projectile2.setTicksLived(20 * 3);
 						}
