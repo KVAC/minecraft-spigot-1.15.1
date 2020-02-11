@@ -182,7 +182,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
 
 		}
-		if (event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.NETHER_STAR)) {
+		Material itemInMainHand = event.getPlayer().getInventory().getItemInMainHand().getType();
+		if (itemInMainHand.equals(Material.NETHER_STAR)) {
 			for (int i = 0; i <= 20; i++) {
 				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
@@ -192,9 +193,70 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 				projectile2.setVelocity(vel);
 				projectile2.setTicksLived(20 * 3);
-				projectile2.setCustomName("aaa");
-				projectile2.setCustomNameVisible(true);
+				// projectile2.setCustomName("aaa");
+				// projectile2.setCustomNameVisible(true);
 			}
+		}
+
+		// ДАЛЬШЕ БЛОК ОРУЖИЯ
+		//
+		else if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
+			Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+			Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+			vel.setX(vel.getX() + randDouble(-10, 10));
+			vel.setY(vel.getY() + randDouble(-10, 10));
+			vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+			projectile2.setVelocity(vel);
+			projectile2.setTicksLived(20 * 3);
+			// projectile2.setCustomName("aaa");
+			// projectile2.setCustomNameVisible(true);
+		} else if (itemInMainHand.equals(Material.STONE_SWORD)) {
+			for (int i = 1; i <= 3; i++) {
+				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+				vel.setX(vel.getX() + randDouble(-10, 10));
+				vel.setY(vel.getY() + randDouble(-10, 10));
+				vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+				projectile2.setVelocity(vel);
+				projectile2.setTicksLived(20 * 3);
+
+			}
+
+		} else if (itemInMainHand.equals(Material.IRON_SWORD)) {
+			for (int i = 1; i <= 4; i++) {
+				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+				vel.setX(vel.getX() + randDouble(-10, 10));
+				vel.setY(vel.getY() + randDouble(-10, 10));
+				vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+				projectile2.setVelocity(vel);
+				projectile2.setTicksLived(20 * 3);
+
+			}
+		} else if (itemInMainHand.equals(Material.GOLDEN_SWORD)) {
+			for (int i = 1; i <= 2; i++) {
+				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+				vel.setX(vel.getX() + randDouble(-10, 10));
+				vel.setY(vel.getY() + randDouble(-10, 10));
+				vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+				projectile2.setVelocity(vel);
+				projectile2.setTicksLived(20 * 3);
+
+			}
+		} else if (itemInMainHand.equals(Material.DIAMOND_SWORD)) {
+			Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+			Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+			vel.setX(vel.getX() + randDouble(-10, 10));
+			vel.setY(vel.getY() + randDouble(-10, 10));
+			vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+			projectile2.setVelocity(vel);
+			projectile2.setTicksLived(20 * 3);
 		}
 	}
 
