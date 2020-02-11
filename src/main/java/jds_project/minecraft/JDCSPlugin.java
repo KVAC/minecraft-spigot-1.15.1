@@ -17,6 +17,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -174,6 +175,12 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	private void checkAndInitBackInventory() {
 		stopBackInventory();
 		startBackInventory();
+	}
+
+	@EventHandler
+	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
+
+		getServer().broadcastMessage(event.getEntityType().toString());
 	}
 
 	@EventHandler
