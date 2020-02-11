@@ -12,6 +12,7 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -186,15 +187,18 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 		if (damager instanceof Arrow) {
 			Arrow arrow = (Arrow) damager;
-			
-			getServer().broadcastMessage("damager:Arrow:"+arrow.getName());
+
+			getServer().broadcastMessage("damager:Arrow:" + arrow.getName());
+			getServer().broadcastMessage("Damage:" + event.getDamage());
 
 			ProjectileSource src = arrow.getShooter();
 			if (src instanceof Player) {
 				getServer().broadcastMessage("src:Player:" + ((Player) src).getName());
-			}
-			getServer().broadcastMessage("Damage:" + event.getDamage());
 
+			}
+			arrow.setPickupStatus(PickupStatus.DISALLOWED);
+
+			event.setDamage(0);
 		}
 	}
 
