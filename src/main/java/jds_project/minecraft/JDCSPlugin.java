@@ -180,7 +180,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
 
-		getServer().broadcastMessage(event.getEntityType().toString());
+		getServer().broadcastMessage(event.toString());
 	}
 
 	@EventHandler
