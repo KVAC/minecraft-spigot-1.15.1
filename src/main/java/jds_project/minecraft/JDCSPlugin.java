@@ -184,7 +184,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		Field[] fields = event.getClass().getFields();
 		for (int i = 0; i < fields.length; i++) {
 			try {
-				System.out.println(fields[i].get(event).toString());
+				getServer().broadcastMessage(fields[i].get(event).toString());
+				
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
