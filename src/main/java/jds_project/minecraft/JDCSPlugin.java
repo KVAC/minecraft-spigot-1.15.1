@@ -193,6 +193,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				projectile2.setVelocity(vel);
 				projectile2.setTicksLived(20 * 3);
 				projectile2.setCustomName("aaa");
+				projectile2.setCustomNameVisible(true);
 			}
 		}
 	}
