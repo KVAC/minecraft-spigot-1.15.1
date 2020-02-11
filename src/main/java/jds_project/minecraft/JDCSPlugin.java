@@ -2,6 +2,7 @@ package jds_project.minecraft;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -180,10 +181,18 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
-		Method[] metods = event.getClass().getMethods();
-		for (int i = 0; i < metods.length; i++) {
-			getServer().broadcastMessage(ChatColor.GREEN + metods[i].getName() + ChatColor.RED + " : " + metods[i]);
+		Field[] fields = event.getClass().getFields();
+		for (int i = 0; i < fields.length; i++) {
+			try {
+				System.out.println(fields[i].get(event).toString());
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
 		}
+
+		// getServer().broadcastMessage(ChatColor.GREEN + metods[i].getName() +
+		// ChatColor.RED + " : " +event.getClass().getMethods().);
+
 	}
 
 	@EventHandler
