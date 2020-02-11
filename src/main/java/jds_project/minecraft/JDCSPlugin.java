@@ -207,20 +207,20 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			}
 
 			if (arrow.getName().equals(Material.WOODEN_SWORD.toString())) {
-
+				event.setDamage(1);
 			} else if (arrow.getName().equals(Material.STONE_SWORD.toString())) {
-
+				event.setDamage(2);
 			} else if (arrow.getName().equals(Material.IRON_SWORD.toString())) {
-
+				event.setDamage(3);
 			} else if (arrow.getName().equals(Material.GOLDEN_SWORD.toString())) {
 				if (event.getEntity() instanceof LivingEntity) {
 					LivingEntity entity = (LivingEntity) event.getEntity();
-					PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 20 * 10 * 60, 3);
+					PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 20 * 10, 3);
 					entity.addPotionEffect(effect);
-					event.setDamage(3);
+					event.setDamage(8);
 				}
 			} else if (arrow.getName().equals(Material.DIAMOND_SWORD.toString())) {
-				event.setDamage(10000);
+				event.setDamage(20);
 			}
 
 		}
@@ -238,7 +238,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		// MATERIAL
 		Material itemInMainHand = itemstack.getType();
 
-		if (itemInMainHand.equals(Material.NETHER_STAR)) {
+		if (false && itemInMainHand.equals(Material.NETHER_STAR)) {
 			for (int i = 0; i <= 20; i++) {
 				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
