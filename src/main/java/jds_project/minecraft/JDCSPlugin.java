@@ -6,11 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -26,6 +28,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
@@ -201,11 +205,23 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			if (src instanceof Player) {
 				// getServer().broadcastMessage("src:Player:" + ((Player) src).getName());
 			}
-			if (arrow.getName().equals(WEAPON_lore0)) {
 
+			if (arrow.getName().equals(Material.WOODEN_SWORD.toString())) {
+
+			} else if (arrow.getName().equals(Material.STONE_SWORD.toString())) {
+
+			} else if (arrow.getName().equals(Material.IRON_SWORD.toString())) {
+
+			} else if (arrow.getName().equals(Material.GOLDEN_SWORD.toString())) {
+				if (event.getEntity() instanceof LivingEntity) {
+					LivingEntity entity = (LivingEntity) event.getEntity();
+					PotionEffect effect = new PotionEffect(PotionEffectType.SLOW, 20 * 10 * 60, 3);
+					entity.addPotionEffect(effect);
+				}
+			} else if (arrow.getName().equals(Material.DIAMOND_SWORD.toString())) {
+				event.setDamage(10000);
 			}
 
-			event.setDamage(0);
 		}
 	}
 
@@ -313,7 +329,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 							projectile2.setVelocity(vel);
 							projectile2.setTicksLived(20 * 3);
 						}
-
 					}
 				}
 			}
