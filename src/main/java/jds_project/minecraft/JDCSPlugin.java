@@ -182,7 +182,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
 		Method[] metods = event.getClass().getMethods();
 		for (int i = 0; i < metods.length; i++) {
-			getServer().broadcastMessage(metods[i].getName() + " : " + metods[i]);
+			getServer().broadcastMessage(ChatColor.GREEN + metods[i].getName() + ChatColor.RED + " : " + metods[i]);
 		}
 	}
 
