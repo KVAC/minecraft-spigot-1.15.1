@@ -2,6 +2,7 @@ package jds_project.minecraft;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -179,8 +180,10 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
-
-		getServer().broadcastMessage(event.toString());
+		Method[] metods = event.getClass().getMethods();
+		for (int i = 0; i < metods.length; i++) {
+			getServer().broadcastMessage(metods[i].getName() + " : " + metods[i]);
+		}
 	}
 
 	@EventHandler
