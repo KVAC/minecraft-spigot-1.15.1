@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -25,6 +26,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
@@ -182,7 +184,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
 
 		}
-		Material itemInMainHand = event.getPlayer().getInventory().getItemInMainHand().getType();
+		// ITEMSTACK
+		ItemStack itemstack = event.getPlayer().getInventory().getItemInMainHand();
+		// MATERIAL
+		Material itemInMainHand = itemstack.getType();
+
 		if (itemInMainHand.equals(Material.NETHER_STAR)) {
 			for (int i = 0; i <= 20; i++) {
 				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
@@ -200,18 +206,31 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 		// ДАЛЬШЕ БЛОК ОРУЖИЯ
 		//
-		else if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
-			Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-			Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-			vel.setX(vel.getX() + randDouble(-10, 10));
-			vel.setY(vel.getY() + randDouble(-10, 10));
-			vel.setZ(vel.getZ() + randDouble(-10, 10));
+		if (itemstack.hasItemMeta()) {
+			ItemMeta meta = itemstack.getItemMeta();
+			if (meta.hasLore()) {
+				List<String> lore = meta.getLore();
+				if (lore.size() > 0) {
+					String lore0 = lore.get(0);
+					if (lore0.equals("aaa")) {
+						if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
+							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+							vel.setX(vel.getX() + randDouble(-10, 10));
+							vel.setY(vel.getY() + randDouble(-10, 10));
+							vel.setZ(vel.getZ() + randDouble(-10, 10));
 
-			projectile2.setVelocity(vel);
-			projectile2.setTicksLived(20 * 3);
-			// projectile2.setCustomName("aaa");
-			// projectile2.setCustomNameVisible(true);
-		} else if (itemInMainHand.equals(Material.STONE_SWORD)) {
+							projectile2.setVelocity(vel);
+							projectile2.setTicksLived(20 * 3);
+							projectile2.setCustomName("Material.WOODEN_SWORD");
+							projectile2.setCustomNameVisible(true);
+						}
+					}
+				}
+			}
+		}
+
+		else if (itemInMainHand.equals(Material.STONE_SWORD)) {
 			for (int i = 1; i <= 3; i++) {
 				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
@@ -237,6 +256,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 			}
 		} else if (itemInMainHand.equals(Material.GOLDEN_SWORD)) {
+
 			for (int i = 1; i <= 2; i++) {
 				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
