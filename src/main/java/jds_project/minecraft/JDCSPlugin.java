@@ -2,31 +2,24 @@ package jds_project.minecraft;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -50,6 +43,19 @@ import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
 import jds_project.minecraft.threads.ArtefactInventTask;
 
 public class JDCSPlugin extends JavaPlugin implements Listener {
+
+	// WEAPON
+
+	static char wws = ' ';
+
+	private static final String WEAPON_lore0 = Character.toString(wws);
+
+	private static final String Weapon_Wooden_sword = "ГЛОК";
+	private static final String Weapon_Stone_sword = "ФАМАС";
+	private static final String Weapon_Iron_sword = "m4a1";
+	private static final String Weapon_Golden_sword = "Scout";
+	private static final String Weapon_Diamond_sword = "Desert Eagle";
+
 	ArtefactInventTask artefactInventTask;
 	JDCSPlugin plugin = this;
 
@@ -188,15 +194,16 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		if (damager instanceof Arrow) {
 			Arrow arrow = (Arrow) damager;
 
-			getServer().broadcastMessage("damager:Arrow:" + arrow.getName());
-			getServer().broadcastMessage("Damage:" + event.getDamage());
+			// getServer().broadcastMessage("damager:Arrow:" + arrow.getName());
+			// getServer().broadcastMessage("Damage:" + event.getDamage());
 
-			ProjectileSource src = arrow.getShooter();
+			ProjectileSource src = arrow.getShooter();// кто выстрелил
 			if (src instanceof Player) {
-				getServer().broadcastMessage("src:Player:" + ((Player) src).getName());
+				// getServer().broadcastMessage("src:Player:" + ((Player) src).getName());
+			}
+			if (arrow.getName().equals(WEAPON_lore0)) {
 
 			}
-			arrow.setPickupStatus(PickupStatus.DISALLOWED);
 
 			event.setDamage(0);
 		}
@@ -208,7 +215,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		if (event.getPlayer().isGliding()) {
 			Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
 			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
-
 		}
 		// ITEMSTACK
 		ItemStack itemstack = event.getPlayer().getInventory().getItemInMainHand();
@@ -238,7 +244,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				List<String> lore = meta.getLore();
 				if (lore.size() > 0) {
 					String lore0 = lore.get(0);
-					if (lore0.equals("aaa")) {
+					// есть лор оружия
+					if (lore0.equals(WEAPON_lore0)) {
 						if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
 							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
@@ -248,62 +255,62 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 							projectile2.setVelocity(vel);
 							projectile2.setTicksLived(20 * 3);
-							projectile2.setCustomName("Material.WOODEN_SWORD");
+							projectile2.setCustomName(itemInMainHand.toString());
 							projectile2.setCustomNameVisible(true);
+						} else if (itemInMainHand.equals(Material.STONE_SWORD)) {
+							for (int i = 1; i <= 3; i++) {
+								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+								vel.setX(vel.getX() + randDouble(-10, 10));
+								vel.setY(vel.getY() + randDouble(-10, 10));
+								vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+								projectile2.setVelocity(vel);
+								projectile2.setTicksLived(20 * 3);
+
+							}
+
+						} else if (itemInMainHand.equals(Material.IRON_SWORD)) {
+							for (int i = 1; i <= 4; i++) {
+								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+								vel.setX(vel.getX() + randDouble(-10, 10));
+								vel.setY(vel.getY() + randDouble(-10, 10));
+								vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+								projectile2.setVelocity(vel);
+								projectile2.setTicksLived(20 * 3);
+
+							}
+						} else if (itemInMainHand.equals(Material.GOLDEN_SWORD)) {
+
+							for (int i = 1; i <= 2; i++) {
+								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+								vel.setX(vel.getX() + randDouble(-10, 10));
+								vel.setY(vel.getY() + randDouble(-10, 10));
+								vel.setZ(vel.getZ() + randDouble(-10, 10));
+
+								projectile2.setVelocity(vel);
+								projectile2.setTicksLived(20 * 3);
+
+							}
+						} else if (itemInMainHand.equals(Material.DIAMOND_SWORD)) {
+							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+							vel.setX(vel.getX() + randDouble(-4, 4));
+							vel.setY(vel.getY() + randDouble(-4, 4));
+							vel.setZ(vel.getZ() + randDouble(-4, 4));
+
+							projectile2.setVelocity(vel);
+							projectile2.setTicksLived(20 * 3);
 						}
+
 					}
 				}
 			}
 		}
 
-		else if (itemInMainHand.equals(Material.STONE_SWORD)) {
-			for (int i = 1; i <= 3; i++) {
-				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-				vel.setX(vel.getX() + randDouble(-10, 10));
-				vel.setY(vel.getY() + randDouble(-10, 10));
-				vel.setZ(vel.getZ() + randDouble(-10, 10));
-
-				projectile2.setVelocity(vel);
-				projectile2.setTicksLived(20 * 3);
-
-			}
-
-		} else if (itemInMainHand.equals(Material.IRON_SWORD)) {
-			for (int i = 1; i <= 4; i++) {
-				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-				vel.setX(vel.getX() + randDouble(-10, 10));
-				vel.setY(vel.getY() + randDouble(-10, 10));
-				vel.setZ(vel.getZ() + randDouble(-10, 10));
-
-				projectile2.setVelocity(vel);
-				projectile2.setTicksLived(20 * 3);
-
-			}
-		} else if (itemInMainHand.equals(Material.GOLDEN_SWORD)) {
-
-			for (int i = 1; i <= 2; i++) {
-				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-				vel.setX(vel.getX() + randDouble(-10, 10));
-				vel.setY(vel.getY() + randDouble(-10, 10));
-				vel.setZ(vel.getZ() + randDouble(-10, 10));
-
-				projectile2.setVelocity(vel);
-				projectile2.setTicksLived(20 * 3);
-
-			}
-		} else if (itemInMainHand.equals(Material.DIAMOND_SWORD)) {
-			Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-			Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-			vel.setX(vel.getX() + randDouble(-4, 4));
-			vel.setY(vel.getY() + randDouble(-4, 4));
-			vel.setZ(vel.getZ() + randDouble(-4, 4));
-
-			projectile2.setVelocity(vel);
-			projectile2.setTicksLived(20 * 3);
-		}
 	}
 
 	private static double randDouble(double min, double max) {

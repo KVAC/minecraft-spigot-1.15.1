@@ -2,14 +2,12 @@ package jds_project.minecraft.threads;
 
 import java.util.Collection;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import jds_project.minecraft.JDCSPlugin;
-import jds_project.minecraft.objects.artefacts.Sluda;
 import jds_project.minecraft.objects.artefacts.sample.Artefact;
 import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
 
