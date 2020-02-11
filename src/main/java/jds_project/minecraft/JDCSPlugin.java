@@ -186,7 +186,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 		if (damager instanceof Arrow) {
 			Arrow arrow = (Arrow) damager;
-			getServer().broadcastMessage("damager:Arrow");
+			
+			getServer().broadcastMessage("damager:Arrow:"+arrow.getName());
 
 			ProjectileSource src = arrow.getShooter();
 			if (src instanceof Player) {
