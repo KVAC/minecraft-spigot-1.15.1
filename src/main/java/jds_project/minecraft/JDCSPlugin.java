@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.Material;
@@ -220,9 +219,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					event.setDamage(8);
 				}
 			} else if (arrow.getName().equals(Material.DIAMOND_SWORD.toString())) {
-				event.setDamage(20);
+				event.setDamage(20000);
 			}
-
 		}
 	}
 
@@ -238,18 +236,28 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		// MATERIAL
 		Material itemInMainHand = itemstack.getType();
 
-		if (false && itemInMainHand.equals(Material.NETHER_STAR)) {
-			for (int i = 0; i <= 20; i++) {
-				Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-				Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-				vel.setX(vel.getX() + randDouble(-10, 10));
-				vel.setY(vel.getY() + randDouble(-10, 10));
-				vel.setZ(vel.getZ() + randDouble(-10, 10));
+		if (itemInMainHand.equals(Material.NETHER_STAR)) {
+			if (itemstack.hasItemMeta()) {
+				if (itemstack.getItemMeta().hasLore()) {
+					List<String> lore = itemstack.getItemMeta().getLore();
+					String lore0 = lore.get(0);
+					if (lore.size() > 0) {
+						if (lore0.equals(WEAPON_lore0)) {
+							for (int i = 0; i <= 20; i++) {
+								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+								vel.setX(vel.getX() + randDouble(-10, 10));
+								vel.setY(vel.getY() + randDouble(-10, 10));
+								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
-				projectile2.setVelocity(vel);
-				projectile2.setTicksLived(20 * 3);
-				// projectile2.setCustomName("aaa");
-				// projectile2.setCustomNameVisible(true);
+								projectile2.setVelocity(vel);
+								projectile2.setTicksLived(20 * 3);
+								// projectile2.setCustomName("aaa");
+								// projectile2.setCustomNameVisible(true);
+							}
+						}
+					}
+				}
 			}
 		}
 
