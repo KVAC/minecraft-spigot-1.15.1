@@ -281,7 +281,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 							projectile2.setVelocity(vel);
 							projectile2.setTicksLived(20 * 3);
 							projectile2.setCustomName(itemInMainHand.toString());
-							projectile2.setCustomNameVisible(true);
+							// projectile2.setCustomNameVisible(true);
 						} else if (itemInMainHand.equals(Material.STONE_SWORD)) {
 							for (int i = 1; i <= 3; i++) {
 								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
@@ -291,7 +291,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
 								projectile2.setCustomName(itemInMainHand.toString());
-								projectile2.setCustomNameVisible(true);
+								// projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -306,7 +306,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
 								projectile2.setCustomName(itemInMainHand.toString());
-								projectile2.setCustomNameVisible(true);
+								// projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -321,7 +321,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
 								projectile2.setCustomName(itemInMainHand.toString());
-								projectile2.setCustomNameVisible(true);
+								// projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 
@@ -335,7 +335,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
 								projectile2.setCustomName(itemInMainHand.toString());
-								projectile2.setCustomNameVisible(true);
+								// projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
 							}
