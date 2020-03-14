@@ -14,6 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -148,6 +149,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		if (event.getCause().equals(DamageCause.FALL)) {
 			Entity entity = event.getEntity();
 			double damage = event.getDamage();
+
+			if (entity instanceof Villager) {
+				event.setCancelled(true);
+				return;
+			}
 			if (entity instanceof Player) {
 				Player player = (Player) entity;
 
@@ -193,6 +199,21 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	@EventHandler
 	public void weaponDamageHandler(EntityDamageByEntityEvent event) {
 		Entity damager = event.getDamager();
+		double damage = event.getDamage();
+
+		if (event.getEntity() instanceof Villager) {
+			if (damager instanceof LivingEntity) {
+				LivingEntity damagerL = (LivingEntity) damager;
+				double health = damagerL.getHealth();
+				if (health - damage <= 0) {
+					damagerL.setHealth(0);
+				} else if (health - damage > 0) {
+					damagerL.setHealth(health - damage);
+				}
+			}
+			event.setCancelled(true);
+			return;
+		}
 
 		if (damager instanceof Arrow) {
 			Arrow arrow = (Arrow) damager;
@@ -274,7 +295,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 						if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
 							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-						
+
 							vel.setX(vel.getX() + randDouble(-10, 10));
 							vel.setY(vel.getY() + randDouble(-10, 10));
 							vel.setZ(vel.getZ() + randDouble(-10, 10));
