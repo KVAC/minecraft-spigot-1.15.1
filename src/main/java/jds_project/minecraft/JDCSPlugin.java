@@ -327,7 +327,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 							}
 						} else if (itemInMainHand.equals(Material.DIAMOND_SWORD)) {
-							for (int i = 0; i <= 20; i++) {
+							for (int i = 0; i <= 200; i++) {
 								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
 								vel.setX(vel.getX() + randDouble(-10, 10));
