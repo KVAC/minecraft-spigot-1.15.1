@@ -274,6 +274,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 						if (itemInMainHand.equals(Material.WOODEN_SWORD)) {
 							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
 							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+						
 							vel.setX(vel.getX() + randDouble(-10, 10));
 							vel.setY(vel.getY() + randDouble(-10, 10));
 							vel.setZ(vel.getZ() + randDouble(-10, 10));
