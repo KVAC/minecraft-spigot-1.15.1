@@ -210,6 +210,19 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				} else if (health - damage > 0) {
 					damagerL.setHealth(health - damage);
 				}
+			} else if (damager instanceof Arrow) {
+				Arrow arrow = (Arrow) damager;
+				ProjectileSource src = arrow.getShooter();// кто выстрелил
+				if (src instanceof LivingEntity) {
+					LivingEntity damagerL = (LivingEntity)src;
+					double health = damagerL.getHealth();
+					if (health - damage <= 0) {
+						damagerL.setHealth(0);
+					} else if (health - damage > 0) {
+						damagerL.setHealth(health - damage);
+					}
+				}
+
 			}
 			event.setCancelled(true);
 			return;
