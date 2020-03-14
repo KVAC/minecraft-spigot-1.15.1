@@ -338,8 +338,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								projectile2.setCustomNameVisible(true);
 								projectile2.setVelocity(vel);
 								projectile2.setTicksLived(20 * 3);
-
-								
 							}
 						}
 					}
