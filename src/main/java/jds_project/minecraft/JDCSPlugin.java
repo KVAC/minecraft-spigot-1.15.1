@@ -327,16 +327,20 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 							}
 						} else if (itemInMainHand.equals(Material.DIAMOND_SWORD)) {
-							Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-							Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-							vel.setX(vel.getX() + randDouble(-4, 4));
-							vel.setY(vel.getY() + randDouble(-4, 4));
-							vel.setZ(vel.getZ() + randDouble(-4, 4));
+							for (int i = 0; i <= 20; i++) {
+								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
+								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
+								vel.setX(vel.getX() + randDouble(-10, 10));
+								vel.setY(vel.getY() + randDouble(-10, 10));
+								vel.setZ(vel.getZ() + randDouble(-10, 10));
 
-							projectile2.setCustomName(itemInMainHand.toString());
-							projectile2.setCustomNameVisible(true);
-							projectile2.setVelocity(vel);
-							projectile2.setTicksLived(20 * 3);
+								projectile2.setCustomName(itemInMainHand.toString());
+								projectile2.setCustomNameVisible(true);
+								projectile2.setVelocity(vel);
+								projectile2.setTicksLived(20 * 3);
+
+								
+							}
 						}
 					}
 				}
