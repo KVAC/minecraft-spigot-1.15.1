@@ -69,6 +69,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	boolean fakeOnline = false;
 
+	public static File pingFile = new File("PING_LOG");
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 
@@ -89,8 +91,11 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				if (event.getPacket().getServerPings().read(0) instanceof WrappedServerPing) {
 					try {
 						// System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
-						Files.write(new File("PING_LOG").toPath(),
-								(event.getPlayer().getAddress().toString() + '\n').getBytes(),
+						if (!pingFile.exists()) {
+							pingFile.getParentFile().mkdirs();
+							pingFile.createNewFile();
+						}
+						Files.write(pingFile.toPath(), (event.getPlayer().getAddress().toString() + '\n').getBytes(),
 								StandardOpenOption.APPEND);
 
 					} catch (IOException e) {
@@ -214,7 +219,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				Arrow arrow = (Arrow) damager;
 				ProjectileSource src = arrow.getShooter();// кто выстрелил
 				if (src instanceof LivingEntity) {
-					LivingEntity damagerL = (LivingEntity)src;
+					LivingEntity damagerL = (LivingEntity) src;
 					double health = damagerL.getHealth();
 					if (health - damage <= 0) {
 						damagerL.setHealth(0);
