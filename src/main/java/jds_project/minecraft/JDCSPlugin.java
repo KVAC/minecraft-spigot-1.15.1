@@ -92,7 +92,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 					try {
 						// System.err.println("PING FROM " + event.getPlayer().getAddress().toString());
 						if (!pingFile.exists()) {
-							pingFile.getParentFile().mkdirs();
 							pingFile.createNewFile();
 						}
 						Files.write(pingFile.toPath(), (event.getPlayer().getAddress().toString() + '\n').getBytes(),
