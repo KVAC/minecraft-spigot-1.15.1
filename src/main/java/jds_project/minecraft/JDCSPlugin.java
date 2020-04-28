@@ -10,7 +10,6 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -58,12 +57,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 	static char wws = ' ';
 
 	private static final String WEAPON_lore0 = Character.toString(wws);
-
-	private static final String Weapon_Wooden_sword = "ГЛОК";
-	private static final String Weapon_Stone_sword = "ФАМАС";
-	private static final String Weapon_Iron_sword = "m4a1";
-	private static final String Weapon_Golden_sword = "Scout";
-	private static final String Weapon_Diamond_sword = "Desert Eagle";
 
 	ArtefactInventTask artefactInventTask;
 	JDCSPlugin plugin = this;
@@ -372,7 +365,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		Player player = event.getPlayer();
 
 		Action action = event.getAction();
-		Block clickedBlock = event.getClickedBlock();
+		// Block clickedBlock = event.getClickedBlock();
 
 		ItemStack itemInmainHand = player.getInventory().getItemInMainHand();
 		Material material = itemInmainHand.getType();
@@ -402,6 +395,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								}
 							}
 							int fireCount = 0;
+							int expCount = 0;
 							for (LivingEntity liv : LivingEntityList) {
 								EntityType type = liv.getType();
 								if (type.equals(EntityType.VILLAGER)) {
@@ -412,11 +406,12 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								if (!(flocBlock.getType().equals(Material.WATER)
 										|| flocEyesBlock.getType().equals(Material.WATER))) {
 									liv.setFireTicks(20 * 10);
-								}else {
-									player.sendMessage(liv.toString());		
+									fireCount = fireCount + 1;
+									expCount = expCount + 1;
 								}
-							
 							}
+							player.giveExp(expCount);
+							player.sendMessage("Подожено:" + fireCount + "\nПолучено опыта:" + expCount);
 						}
 					}
 				}
