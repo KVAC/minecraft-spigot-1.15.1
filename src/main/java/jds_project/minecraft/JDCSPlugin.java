@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -17,10 +18,12 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -264,11 +267,13 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void ArrowLaunch(PlayerToggleSneakEvent event) {
+		/*
+		 * if (event.getPlayer().isGliding()) { Projectile projectile =
+		 * event.getPlayer().launchProjectile(Arrow.class);
+		 * projectile.setVelocity(event.getPlayer().getLocation().getDirection().
+		 * multiply(100)); }
+		 */
 
-		if (event.getPlayer().isGliding()) {
-			Projectile projectile = event.getPlayer().launchProjectile(Arrow.class);
-			projectile.setVelocity(event.getPlayer().getLocation().getDirection().multiply(100));
-		}
 		// ITEMSTACK
 		ItemStack itemstack = event.getPlayer().getInventory().getItemInMainHand();
 		// MATERIAL
@@ -383,6 +388,30 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 			}
 		}
 
+	}
+
+	public static void pkm(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+
+		Action action = event.getAction();
+		Block clickedBlock = event.getClickedBlock();
+
+		ItemStack itemInmainHand = player.getInventory().getItemInMainHand();
+		Material material = itemInmainHand.getType();
+
+		if (action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (material.equals(Material.NETHER_STAR)) {
+				if (itemInmainHand.hasItemMeta()) {
+					ItemMeta meta = itemInmainHand.getItemMeta();
+					List<String> lore = meta.getLore();
+					if (lore != null && lore.size() > 0) {
+						for (String string : lore) {
+							player.sendMessage(string);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static double randDouble(double min, double max) {
