@@ -390,6 +390,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 
 	}
 
+	@EventHandler
 	public static void pkm(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 
