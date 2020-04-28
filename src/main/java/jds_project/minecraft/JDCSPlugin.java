@@ -407,13 +407,8 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								if (!(flocBlock.getType().equals(Material.WATER)
 										|| flocEyesBlock.getType().equals(Material.WATER))) {
 
-									int bef = liv.getFireTicks();
-									if (bef == -1) {
-
+									if (liv.getFireTicks() == -1) {
 										liv.setFireTicks(20 * 10);
-										int aft = liv.getFireTicks();
-
-										player.sendMessage(bef + ":" + aft);
 										fireCount = fireCount + 1;
 										expCount = expCount + 1;
 									}
