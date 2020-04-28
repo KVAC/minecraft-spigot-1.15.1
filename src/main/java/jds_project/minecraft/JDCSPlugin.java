@@ -405,7 +405,9 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								if (type.equals(EntityType.VILLAGER)) {
 									continue;
 								}
-								player.sendMessage(liv.toString());
+								
+								liv.setFireTicks(20*10);
+								
 							}
 						}
 					}
