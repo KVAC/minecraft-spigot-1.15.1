@@ -411,7 +411,12 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								}
 							}
 							player.giveExp(expCount);
-							player.sendMessage("Подожено:" + fireCount + "\nПолучено опыта:" + expCount);
+							if (expCount > 0) {
+								player.sendMessage("Получено опыта:" + expCount);
+							}
+							if (fireCount > 0) {
+								player.sendMessage("Подожено:" + fireCount);
+							}
 						}
 					}
 				}
