@@ -397,14 +397,19 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		Block clickedBlock = event.getClickedBlock();
 
 		ItemStack itemInmainHand = player.getInventory().getItemInMainHand();
+		System.out.println("itemInmainHand:" + itemInmainHand.toString());
+
 		Material material = itemInmainHand.getType();
+		System.out.println("material:" + material.toString());
+
+		System.out.println("##############################################################");
 
 		if (action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
 			System.out.println(action.toString());
 			if (material.equals(Material.NETHER_STAR)) {
 				System.out.println(material.toString());
 				if (itemInmainHand.hasItemMeta()) {
-					System.out.println("meta:"+itemInmainHand.hasItemMeta());
+					System.out.println("meta:" + itemInmainHand.hasItemMeta());
 					ItemMeta meta = itemInmainHand.getItemMeta();
 					List<String> lore = meta.getLore();
 					System.out.println(lore.size());
