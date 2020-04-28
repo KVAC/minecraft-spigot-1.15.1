@@ -10,6 +10,7 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -400,16 +401,21 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 									e.printStackTrace();
 								}
 							}
-							int fireCount=0;
+							int fireCount = 0;
 							for (LivingEntity liv : LivingEntityList) {
 								EntityType type = liv.getType();
 								if (type.equals(EntityType.VILLAGER)) {
 									continue;
 								}
-								
-								player.sendMessage(liv.toString()+":"+liv.getLocation()+liv.getEyeLocation());
-								liv.setFireTicks(20*10);
-								
+								Block flocBlock = liv.getLocation().getBlock();
+								Block flocEyesBlock = liv.getEyeLocation().getBlock();
+								if (!(flocBlock.getType().equals(Material.WATER)
+										|| flocEyesBlock.getType().equals(Material.WATER))) {
+									liv.setFireTicks(20 * 10);
+								}else {
+									player.sendMessage(liv.toString());		
+								}
+							
 							}
 						}
 					}
