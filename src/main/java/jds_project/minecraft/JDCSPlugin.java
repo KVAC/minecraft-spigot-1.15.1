@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -279,31 +280,6 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		// MATERIAL
 		Material itemInMainHand = itemstack.getType();
 
-		if (itemInMainHand.equals(Material.NETHER_STAR)) {
-			if (itemstack.hasItemMeta()) {
-				if (itemstack.getItemMeta().hasLore()) {
-					List<String> lore = itemstack.getItemMeta().getLore();
-					String lore0 = lore.get(0);
-					if (lore.size() > 0) {
-						if (lore0.equals(WEAPON_lore0)) {
-							for (int i = 0; i <= 20; i++) {
-								Projectile projectile2 = event.getPlayer().launchProjectile(Arrow.class);
-								Vector vel = event.getPlayer().getLocation().getDirection().multiply(100);
-								vel.setX(vel.getX() + randDouble(-10, 10));
-								vel.setY(vel.getY() + randDouble(-10, 10));
-								vel.setZ(vel.getZ() + randDouble(-10, 10));
-
-								projectile2.setVelocity(vel);
-								projectile2.setTicksLived(20 * 3);
-								// projectile2.setCustomName("aaa");
-								// projectile2.setCustomNameVisible(true);
-							}
-						}
-					}
-				}
-			}
-		}
-
 		// ДАЛЬШЕ БЛОК ОРУЖИЯ
 		//
 		if (itemstack.hasItemMeta()) {
@@ -398,25 +374,39 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 		Block clickedBlock = event.getClickedBlock();
 
 		ItemStack itemInmainHand = player.getInventory().getItemInMainHand();
-		System.out.println("itemInmainHand:" + itemInmainHand.toString());
-
 		Material material = itemInmainHand.getType();
-		System.out.println("material:" + material.toString());
-
-		System.out.println("##############################################################");
 
 		if (action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
-			System.out.println(action.toString());
 			if (material.equals(Material.NETHER_STAR)) {
-				System.out.println(material.toString());
 				if (itemInmainHand.hasItemMeta()) {
-					System.out.println("meta:" + itemInmainHand.hasItemMeta());
 					ItemMeta meta = itemInmainHand.getItemMeta();
 					List<String> lore = meta.getLore();
-					System.out.println(lore.size());
 					if (lore != null && lore.size() > 0) {
+						boolean fireActivator = false;
 						for (String string : lore) {
-							player.sendMessage(string);
+							if (string.equals(WEAPON_lore0)) {
+								fireActivator = true;
+							}
+						}
+						if (fireActivator) {
+							ArrayList<LivingEntity> LivingEntityList = new ArrayList<LivingEntity>();
+							List<Entity> entitySList = player.getNearbyEntities(30, 30, 30);
+							for (Entity entity : entitySList) {
+								try {
+									if (entity instanceof LivingEntity) {
+										LivingEntityList.add((LivingEntity) entity);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+							for (LivingEntity liv : LivingEntityList) {
+								EntityType type = liv.getType();
+								if (type.equals(EntityType.VILLAGER)) {
+									continue;
+								}
+								player.sendMessage(liv.toString());
+							}
 						}
 					}
 				}
