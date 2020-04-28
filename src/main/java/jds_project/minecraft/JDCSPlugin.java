@@ -403,11 +403,14 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 								}
 								Block flocBlock = liv.getLocation().getBlock();
 								Block flocEyesBlock = liv.getEyeLocation().getBlock();
-								player.sendMessage(player.getFireTicks() + "");
+
 								if (!(flocBlock.getType().equals(Material.WATER)
 										|| flocEyesBlock.getType().equals(Material.WATER))) {
-
+									int bef = liv.getFireTicks();
 									liv.setFireTicks(20 * 10);
+									int aft = liv.getFireTicks();
+
+									player.sendMessage(bef + ":" + aft);
 									fireCount = fireCount + 1;
 									expCount = expCount + 1;
 
