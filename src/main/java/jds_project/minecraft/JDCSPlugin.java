@@ -400,12 +400,14 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 									e.printStackTrace();
 								}
 							}
+							int fireCount=0;
 							for (LivingEntity liv : LivingEntityList) {
 								EntityType type = liv.getType();
 								if (type.equals(EntityType.VILLAGER)) {
 									continue;
 								}
 								
+								player.sendMessage(liv.toString()+":"+liv.getLocation()+liv.getEyeLocation());
 								liv.setFireTicks(20*10);
 								
 							}
