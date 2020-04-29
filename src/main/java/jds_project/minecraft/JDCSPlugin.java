@@ -375,6 +375,7 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 				if (itemInmainHand.hasItemMeta()) {
 					ItemMeta meta = itemInmainHand.getItemMeta();
 					List<String> lore = meta.getLore();
+
 					if (lore != null && lore.size() > 0) {
 						boolean fireActivator = false;
 						for (String string : lore) {
@@ -414,9 +415,10 @@ public class JDCSPlugin extends JavaPlugin implements Listener {
 									}
 								}
 							}
-							player.giveExp(expCount);
+							player.giveExp(Integer.parseInt("-" + expCount));
+
 							if (expCount > 0) {
-								player.sendMessage("Получено опыта:" + expCount);
+								player.sendMessage("Потрачено опыта:" + expCount);
 							}
 							if (fireCount > 0) {
 								player.sendMessage("Подожено:" + fireCount);

@@ -10,18 +10,16 @@ import org.bukkit.scheduler.BukkitRunnable;
 import jds_project.minecraft.JDCSPlugin;
 import jds_project.minecraft.objects.artefacts.sample.Artefact;
 import jds_project.minecraft.objects.artefacts.sample.Artefact.ArtefactType;
+import lombok.Getter;
+import lombok.Setter;
 
 public class ArtefactInventTask extends BukkitRunnable {
+	@Getter
+	@Setter
 	private boolean stopeed = false;
+	@Getter
+	@Setter
 	private JDCSPlugin main;
-
-	public JDCSPlugin getMain() {
-		return main;
-	}
-
-	public void setMain(JDCSPlugin main) {
-		this.main = main;
-	}
 
 	public ArtefactInventTask(JDCSPlugin plugin) {
 		this.main = plugin;
@@ -51,7 +49,7 @@ public class ArtefactInventTask extends BukkitRunnable {
 				 */
 				// ART
 				PlayerInventory inventory = player.getInventory();
-				
+
 				try {
 
 					ItemStack[] itemstacks = inventory.getStorageContents();
@@ -87,11 +85,4 @@ public class ArtefactInventTask extends BukkitRunnable {
 		stopeed = true;
 	}
 
-	public boolean isStopeed() {
-		return stopeed;
-	}
-
-	public void setStopeed(boolean stopeed) {
-		this.stopeed = stopeed;
-	}
 }

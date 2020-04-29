@@ -10,18 +10,30 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import jds_project.minecraft.objects.artefacts.Pillow;
 import jds_project.minecraft.objects.artefacts.Sluda;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Artefact extends ItemStack {
 	public static enum ArtefactType {
 		SLUDA, OBJECT639, PILLOW
 	}
 
+	@Getter
+	@Setter
 	private String artefactID = "ZERO";
 
+	@Getter
+	@Setter
 	private Material material = Material.STONE;
 
+	@Getter
+	@Setter
 	private List<String> loree = new ArrayList<String>();
+
+	@Getter
+	@Setter
 	private String lore0 = "Artefact_DEFAULT";
+
 	public static int lore1_cost = 10000;
 
 	protected static void initART(Artefact artefact) {
@@ -91,7 +103,6 @@ public class Artefact extends ItemStack {
 				e.printStackTrace();
 			}
 		}
-
 		return type;
 	}
 
@@ -103,37 +114,5 @@ public class Artefact extends ItemStack {
 	//
 	//
 	//
-
-	public Material getMaterial() {
-		return material;
-	}
-
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
-
-	public String getLore0() {
-		return lore0;
-	}
-
-	public void setLore0(String lore0) {
-		this.lore0 = lore0;
-	}
-
-	public List<String> getLoree() {
-		return loree;
-	}
-
-	public void setLoree(List<String> loree) {
-		this.loree = loree;
-	}
-
-	public String getArtefactID() {
-		return artefactID;
-	}
-
-	public void setArtefactID(String artefactID) {
-		this.artefactID = artefactID;
-	}
 
 }
